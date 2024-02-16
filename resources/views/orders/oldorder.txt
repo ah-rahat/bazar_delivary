@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html" />
+		<meta name="author" content="gopalganjbazar" />
+		<title>
+			Order Invoice
+		</title>
+	</head>
+	<body>
+		<div style=" min-height: .01%; overflow-x: auto;max-width: 600px;font-family: verdana;font-size: 13px; border: 1px solid #41c3000f; margin:50px auto auto auto;display: block;border-radius: 2px;padding: 20px;box-shadow: 0px 1px 4px #ddd;">
+			<div>
+				<img src="https://gopalganjbazar.com/static/img/gopalgonjbazar-logo.69a19e5.png" height="50px" style="margin: auto;display: block;" />
+				<h3 style="display: block;text-align: center;margin: 32px 0 25px 0px;">
+					ORDER INVOICE
+				</h3>
+			</div>
+			<table style="width: 100%;text-align: left;border: 1px solid #8e8e8e36;">
+				<thead>
+					<tr>
+						<th style="text-transform: uppercase;font-weight: 500;">
+							Product Name
+						</th>
+						<th style="text-transform: uppercase;font-weight: 500;">
+							Unit Price
+						</th>
+						<th style="text-transform: uppercase;font-weight: 500;">
+							Quantity
+						</th>
+						<th style="text-transform: uppercase;font-weight: 500;">
+							Total
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach($orders as $order)
+					<tr>
+						<td style="padding: 5px;border-top: 1px solid #8e8e8e36;">
+							{{ $order->product_name}} {{ $order->unit}} {{ $order->unit_quantity}}
+						</td>
+					<td style="padding: 5px;border-top: 1px solid #8e8e8e36;">
+							&#2547;{{ $order->unit_price}}
+						</td>
+						<td  style="text-align: center; padding: 5px;border-top: 1px solid #8e8e8e36;">
+							{{ $order->quantity}}
+						</td>
+						<td style="padding: 5px;border-top: 1px solid #8e8e8e36;color: #41c300;">
+							&#2547; {{ $order->total_price}}
+						</td>
+					</tr>
+					@endforeach 
+					<tr>
+						<td colspan="3" style="text-align: right;padding: 5px;border-top: 1px solid #8e8e8e36;">
+							Delivery Charge
+						</td>
+						<td style="padding: 5px;border-top: 1px solid #8e8e8e36; color: #41c300;">
+							&#2547; {{ $orders->first()->delivery_charge }} 
+						</td>
+					</tr>
+					<tr>
+						<td colspan="3" style="text-align: right;padding: 5px;border-top: 1px solid #8e8e8e36;">
+							Discount
+						</td>
+						<td style="padding: 5px;border-top: 1px solid #8e8e8e36;color: #fb8c00;">
+							&#2547;  {{ $orders->first()->coupon_discount_amount }} 
+						</td>
+					</tr>
+					<tr>
+						<td colspan="3" style="text-align: right;padding: 5px;border-top: 1px solid #8e8e8e36;">
+							Total
+						</td>
+						<td style="padding: 5px;border-top: 1px solid #8e8e8e36; color: #41c300;">
+							&#2547; {{ $orders->first()->order_total+$orders->first()->delivery_charge-$orders->first()->coupon_discount_amount }} 
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		 
+		</div>
+	</body>
+
+</html>
